@@ -3,7 +3,7 @@
 # PARAMETERS
 forcefield = "charmm36-mar2019"
 watermodel = "tip3p"
-timesteps  = 5000
+timesteps  = 50000
 
 import os, fnmatch
 
@@ -46,7 +46,7 @@ os.system("gmx grompp -f ../EM.mdp -c solvent.pdb -p topol.top -o solvent_EM.tpr
 os.system("gmx mdrun -v -s solvent_EM.tpr -c solvent.pdb")
 
 # prepare mdrun
-os.system("gmx grompp -f ../MD.mdp -c solvent.pdb -p topol.top -o solvent.tpr -maxwarn 1")
+os.system("gmx grompp -f ../MD.mdp -c solvent.pdb -p topol.top -o solvent.tpr -maxwarn 2")
 os.system("gmx convert-tpr -s solvent.tpr -nsteps {0} -o solvent.tpr".format(timesteps))
 
 # do mdrun
